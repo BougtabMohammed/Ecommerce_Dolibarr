@@ -30,6 +30,15 @@ public class Cart {
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
+
+    // Relation OneToMany entre cette entité (par exemple Cart) et l'entité CartItem.
+    // 1- mappedBy = "cart" : signifie que le champ "cart" dans
+    // la classe CartItem est le propriétaire de la relation.
+    // 2- cascade = CascadeType.ALL : toutes les opérations (persist, merge, remove, etc.)
+    // effectuées sur Cart seront propagées à ses CartItems.
+    // 3- orphanRemoval = true : si un CartItem est retiré de la collection cartItems,
+    // il sera automatiquement supprimé de la base de données
+
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CartItem> cartItems = new HashSet<>();
 
